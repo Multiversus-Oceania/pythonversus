@@ -5,28 +5,31 @@ from dotenv import load_dotenv
 
 
 class MvsAPIWrapper:
-    def __init__(self, steamToken=None):
+    def __init__(self, steam_token=None):
+        self.header = None
+        self.token = None
+        self.steam_token = None
         self.url = "https://dokken-api.wbagora.com/"
         self.session = requests.Session()
 
-        if steamToken is None:
+        if steam_token is None:
             load_dotenv()  # Load environment variables from .env file
-            steamToken = os.getenv('MULTIVERSUS_TOKEN')
+            steam_token = os.getenv('MULTIVERSUS_TOKEN')
 
-        self.refresh_token(steamToken)
+        self.refresh_token(steam_token)
 
-    def refresh_token(self, steamToken: string = None):
-        if steamToken is not None:
-            self.steamToken = steamToken
+    def refresh_token(self, api_token: string = None):
+        if api_token is not None:
+            self.steam_token = api_token
 
-        tempHeaders = {
+        temp_headers = {
             'x-hydra-api-key': '51586fdcbd214feb84b0e475b130fce0',
             'x-hydra-user-agent': 'Hydra-Cpp/1.132.0',
             'Content-Type': 'application/json',
             'x-hydra-client-id': '47201f31-a35f-498a-ae5b-e9915ecb411e'
         }
-        tempBody = {"auth": {"fail_on_missing": 1, "steam": self.steamToken}, "options": ["wb_network"]}
-        req = self.session.post(f"{self.url}access", json=tempBody, headers=tempHeaders).json()
+        temp_body = {"auth": {"fail_on_missing": 1, "steam": self.steam_token}, "options": ["wb_network"]}
+        req = self.session.post(f"{self.url}access", json=temp_body, headers=temp_headers).json()
         self.token = req["token"]
         self.header = {
             'x-hydra-api-key': '51586fdcbd214feb84b0e475b130fce0',
@@ -54,7 +57,7 @@ class MvsAPIWrapper:
         endpoint = f"{self.url}accounts/{account_id}"
         return self.api_request(endpoint)
 
-    def get_id_from_username(self, account_name, limit = 5):
+    def get_id_from_username(self, account_name, limit=5):
         endpoint = f"{self.url}profiles/search_queries/get-by-username/run?username={account_name}&limit={limit}"
         players = self.api_request(endpoint)
 
@@ -73,8 +76,6 @@ class MvsAPIWrapper:
                     return account_id
 
         return "Failed to find matching account"
-
-
 
 
 # Example usage
