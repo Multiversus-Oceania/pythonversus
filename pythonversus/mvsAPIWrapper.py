@@ -77,6 +77,14 @@ class MvsAPIWrapper:
 
         return "Failed to find matching account"
 
+    def get_rank_ones(self, account_id):
+        endpoint = f"{self.url}leaderboards/1v1/score-and-rank/{account_id}"
+        return self.api_request(endpoint)
+
+    def get_matches(self, account_id):
+        endpoint = f"{self.url}matches/all/{account_id}?count=1"
+        return api.api_request(endpoint)
+
 
 # Example usage
 if __name__ == "__main__":
@@ -87,6 +95,10 @@ if __name__ == "__main__":
         player_name = "taetae"
         # print("Player Profile:", player_profile)
         print("Searching for account with username {}".format(player_name))
-        print("Player search: ", api.get_id_from_username(player_name))
+        player_id = api.get_id_from_username(player_name)
+        print("Player search: ", player_id)
+        print("Player profile: ", api.get_player_profile(player_id))
+        recent_match = api.get_matches(player_id)
+        print("Recent match: ", recent_match)
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
