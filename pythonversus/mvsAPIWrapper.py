@@ -58,6 +58,9 @@ class MvsAPIWrapper:
         return self.api_request(endpoint)
 
     def get_id_from_username(self, account_name, limit=5):
+        """
+        Perform a username search for a player. Tries to match the exact username.
+        """
         endpoint = f"{self.url}profiles/search_queries/get-by-username/run?username={account_name}&limit={limit}"
         players = self.api_request(endpoint)
 
@@ -75,16 +78,22 @@ class MvsAPIWrapper:
                 if username and username.lower() == account_name.lower():
                     return account_id
 
+        # Exact username search didn't work, returning failure for now
         return "Failed to find matching account"
 
     def get_rank_ones(self, account_id):
         endpoint = f"{self.url}leaderboards/1v1/score-and-rank/{account_id}"
         return self.api_request(endpoint)
 
-    def get_matches(self, account_id):
-        endpoint = f"{self.url}matches/all/{account_id}?count=1"
-        return api.api_request(endpoint)
+    def get_matches(self, account_id, count=None):
+        if count is None:
+            endpoint = f"{self.url}matches/all/{account_id}"
+        else:
+            endpoint = f"{self.url}matches/all/{account_id}?count={count}"
+        return self.api_request(endpoint)
 
+    def get_most_recent_match(self, account_id):
+        return self.get_matches(account_id, 1)
 
 # Example usage
 if __name__ == "__main__":
@@ -97,8 +106,8 @@ if __name__ == "__main__":
         print("Searching for account with username {}".format(player_name))
         player_id = api.get_id_from_username(player_name)
         print("Player search: ", player_id)
-        print("Player profile: ", api.get_player_profile(player_id))
-        recent_match = api.get_matches(player_id)
+        # print("Player profile: ", api.get_player_profile(player_id))
+        recent_match = api.get_most_recent_match(player_id)
         print("Recent match: ", recent_match)
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
