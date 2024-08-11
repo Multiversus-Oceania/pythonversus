@@ -1,3 +1,4 @@
+import json
 import string
 import requests
 import os
@@ -82,7 +83,7 @@ class MvsAPIWrapper:
         return "Failed to find matching account"
 
     def get_rank_ones(self, account_id):
-        endpoint = f"{self.url}leaderboards/1v1/score-and-rank/{account_id}"
+        endpoint = f"{self.url}leaderboards/1v1-ranked/score-and-rank/{account_id}"
         return self.api_request(endpoint)
 
     def get_matches(self, account_id, count=None):
@@ -94,6 +95,11 @@ class MvsAPIWrapper:
 
     def get_most_recent_match(self, account_id):
         return self.get_matches(account_id, 1)
+
+    def get_match_by_id(self, id):
+        endpoint = f"{self.url}matches/{id}"
+        return self.api_request(endpoint)
+
 
 # Example usage
 if __name__ == "__main__":
@@ -107,7 +113,13 @@ if __name__ == "__main__":
         player_id = api.get_id_from_username(player_name)
         print("Player search: ", player_id)
         # print("Player profile: ", api.get_player_profile(player_id))
-        recent_match = api.get_most_recent_match(player_id)
-        print("Recent match: ", recent_match)
+        # recent_match = api.get_most_recent_match(player_id)
+        # print("Recent match: ", recent_match)
+        # matches = api.get_matches(player_id)
+        # second_last_match = matches["matches"][1]
+        # print(json.dumps(second_last_match, indent=4))
+        # recent_match = api.get_most_recent_match(player_id)
+        # print("Recent match: ", json.dumps(recent_match, indent=4))
+        print(api.get_rank_ones(player_id))
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
