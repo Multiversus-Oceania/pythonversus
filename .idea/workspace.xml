@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6be1298-9265-4184-b037-aed3e7753488" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pythonversus/mvsAPIWrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/pythonversus/mvsAPIWrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pythonversus/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/pythonversus/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +38,7 @@
   "keyToString": {
     "Python.MvsAPIWrapper.executor": "Run",
     "Python.mvsAPIWrapper.executor": "Run",
+    "Python.user.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
@@ -42,7 +46,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -69,6 +73,12 @@
       <updated>1723195971512</updated>
       <workItem from="1723195973454" duration="2557000" />
       <workItem from="1723199798677" duration="11260000" />
+      <workItem from="1723365905546" duration="139000" />
+      <workItem from="1723366381697" duration="370000" />
+      <workItem from="1723368172967" duration="542000" />
+      <workItem from="1723374807378" duration="755000" />
+      <workItem from="1723375828285" duration="155000" />
+      <workItem from="1723376457687" duration="2187000" />
     </task>
     <servers />
   </component>
@@ -76,7 +86,8 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/pythonversus$mvsAPIWrapper.coverage" NAME="mvsAPIWrapper Coverage Results" MODIFIED="1723378643902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pythonversus" />
+    <SUITE FILE_PATH="coverage/pythonversus$user.coverage" NAME="user Coverage Results" MODIFIED="1723378593261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pythonversus" />
     <SUITE FILE_PATH="coverage/pythonversus$MvsAPIWrapper.coverage" NAME="MvsAPIWrapper Coverage Results" MODIFIED="1723199977190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pythonversus$mvsAPIWrapper.coverage" NAME="mvsAPIWrapper Coverage Results" MODIFIED="1723290178574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pythonversus" />
   </component>
 </project>
