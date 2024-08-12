@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6be1298-9265-4184-b037-aed3e7753488" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pythonversus/mvsAPIWrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/pythonversus/mvsAPIWrapper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pythonversus/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/pythonversus/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +43,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -79,6 +76,8 @@
       <workItem from="1723374807378" duration="755000" />
       <workItem from="1723375828285" duration="155000" />
       <workItem from="1723376457687" duration="2187000" />
+      <workItem from="1723450409295" duration="648000" />
+      <workItem from="1723452189055" duration="68000" />
     </task>
     <servers />
   </component>

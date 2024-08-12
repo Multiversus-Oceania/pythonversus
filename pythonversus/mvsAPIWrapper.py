@@ -110,6 +110,10 @@ class AsyncMvsAPIWrapper:
         endpoint = f"{self.url}matches/{id}"
         return await self.api_request(endpoint)
 
+    async def get_rank_data(self, account_id: str, gamemode: str, season: int = 2) -> Dict[str, Any]:
+        endpoint = f"{self.url}leaderboards/ranked_season{season}_{gamemode}_all/score-and-rank/{account_id}"
+        return await self.api_request(endpoint)
+
 
 # Example usage
 async def main():
@@ -117,9 +121,11 @@ async def main():
         try:
             name = "taetae"
             user = await User.from_username(api, name)
-            print("Username:", user.username)
-            print("id:", user.account_id)
-            print(json.dumps(user.profile_data))
+            rank_str = await user.get_rank_str("2v2")
+            print(name + "'s 2v2 rank: " + rank_str)
+            # print("Username:", user.username)
+            # print("id:", user.account_id)
+            # print(json.dumps(user.profile_data))
         except aiohttp.ClientError as e:
             print(f"An error occurred: {e}")
 
