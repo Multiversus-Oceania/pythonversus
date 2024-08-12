@@ -1,118 +1,143 @@
 Characters = {
+    "AgentSmith": {
+        "name": "Agent Smith",
+        "slug": "character_c036",
+        "emote": "<:AgentSmithIcon:1259926284713197620>",
+    },
     "AryaStark": {
         "name": "Arya Stark",
         "slug": "character_arya",
-        "emote": "<:AryaLogo:980374195798171710>"
+        "emote": "<:AryaStarkIcon:1268459674978488413>"
+    },
+    "BananaGuard": {
+        "name": "Banana Guard",
+        "slug": "character_bananaguard",
+        "emote": "<:BananaGuardIcon:1268459677679878207>"
     },
     "Batman": {
         "name": "Batman",
         "slug": "character_batman",
-        "emote": "<:BatmanLogo:980374315717500928>"
+        "emote": "<:BatmanIcon:1268459684973514813>"
     },
     "BlackAdam": {
         "name": "Black Adam",
         "slug": "character_C021",
-        "emote": "<:BlackAdamLogo:1036903155545411634>"
+        "emote": "<:BlackAdamIcon:1268459687578435647>"
     },
     "BugsBunny": {
-        "name": "BugsBunny",
+        "name": "Bugs Bunny",
         "slug": "character_bugs_bunny",
-        "emote": "<:BugsLogo:980374385347145798>"
+        "emote": "<:BugsBunnyIcon:1268459689780183070>"
     },
     "Finn": {
         "name": "Finn",
         "slug": "character_finn",
-        "emote": "<:FinnLogo:1017563948456890368>"
+        "emote": "<:FinnTheHumanIcon:1268459691894116476>"
     },
     "Garnet": {
         "name": "Garnet",
         "slug": "character_garnet",
-        "emote": "<:GarnetLogo:980374527806697482>"
+        "emote": "<:GarnetIcon:1268459694289326151>"
     },
     "Gizmo": {
         "name": "Gizmo",
         "slug": "character_C023A",
-        "emote": "<:GizmoLogo:1017631697631719434>"
+        "emote": "<:GizmoIcon2:1268459699641258018>"
     },
     "HarleyQuinn": {
         "name": "Harley Quinn",
         "slug": "character_harleyquinn",
-        "emote": "<:HarleyLogo:980374594336727070>"
+        "emote": "<:HarleyQuinnIcon:1268459701838938112>"
     },
     "IronGiant": {
         "name": "Iron Giant",
         "slug": "character_C017",
-        "emote": "<:IronGiantLogo:1001745826353254410>"
+        "emote": "<:TheIronGiantIcon:1268459704065986581>"
     },
     "Jake": {
         "name": "Jake",
         "slug": "character_jake",
         "emote": "<:JakeLogo:980375030947004416>"
     },
+    "Jason": {
+        "name": "Jason",
+        "slug": "character_c035",
+        "emote": "<:JasonIcon:1268459708486782976>",
+    },
+    "Joker": {
+        "name": "Joker",
+        "slug": "character_c028",
+        "emote": "<:JokerIcon:1268459710382739516>",
+    },
     "LebronJames": {
         "name": "Lebron James",
         "slug": "character_c16",
-        "emote": "<:LeBronLogo:1001746012131569664>"
+        "emote": "<:LebronIcon:1268459712974950410>"
     },
     "Marvin": {
         "name": "Marvin",
         "slug": "character_C018",
-        "emote": "<:MarvinLogo:1045501012737269770>"
+        "emote": "<:MarvinTheMartianIcon:1268459715495727114>"
     },
     "Morty": {
         "name": "Morty",
         "slug": "character_c019",
-        "emote": "<:MortyLogo:1011836360866398269>"
+        "emote": "<:MortyIcon:1268459718209179648>"
     },
     "Reindog": {
         "name": "Reindog",
         "slug": "character_creature",
-        "emote": "<:ReindogLogo:980375104703852605>"
+        "emote": "<:ReindogIcon:1268459720214052925>"
     },
-    "RickSanchez": {
-        "name": "Rick Sanchez",
+    "Rick": {
+        "name": "Rick",
         "slug": "character_C020",
-        "emote": "<:RickLogo:1024529297765060608>"
+        "emote": "<:RickIcon:1268459825218453534>"
     },
     "Shaggy": {
         "name": "Shaggy",
         "slug": "character_shaggy",
-        "emote": "<:ShaggyLogo:1017563955016781915>"
+        "emote": "<:ShaggyIcon:1268459729747972147>"
+    },
+    "SamuraiJack": {
+        "name": "Samurai Jack",
+        "slug": "character_c026",
+        "emote": "<:SamuraiJackIcon:1268459724920193115>"
     },
     "StevenUniverse": {
         "name": "Steven Universe",
         "slug": "character_steven",
-        "emote": "<:StevenLogo:1001121366386417705>"
+        "emote": "<:StevenUniverseIcon:1268459733858390097>"
     },
     "Stripe": {
         "name": "Stripe",
         "slug": "character_C023B",
-        "emote": "<:StripeLogo:1029907875042177094>"
+        "emote": "<:StripeIcon:1268459735980703808>"
     },
     "Superman": {
         "name": "Superman",
         "slug": "character_superman",
-        "emote": "<:SupermanLogo:1001121284085788683>"
+        "emote": "<:SupermanIcon:1268459738014941256>"
     },
     "Taz": {
         "name": "Taz",
         "slug": "character_taz",
-        "emote": "<:TazLogo:1001121434636144752>"
+        "emote": "<:TazIcon:1268459827647221800>"
     },
     "TomAndJerry": {
         "name": "Tom & Jerry",
         "slug": "character_tom_and_jerry",
-        "emote": "<:TomJerryLogo:1001121508850159636>"
+        "emote": "<:TomAndJerryIcon:1268459742313971734>"
     },
     "Velma": {
         "name": "Velma",
         "slug": "character_velma",
-        "emote": "<:VelmaLogo:1017563961350176808>"
+        "emote": "<:VelmaIcon:1268459747968024610>"
     },
     "WonderWoman": {
         "name": "Wonder Woman",
         "slug": "character_wonder_woman",
-        "emote": "<:WonderWomanLogo:1001121636164063246>"
+        "emote": "<:WonderWomanIcon:1268459749914181724>"
     }
 }
 
