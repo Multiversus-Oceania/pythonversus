@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional, Dict, Any
 
-from pythonversus import utils
+from a_pythonversus import utils
 
 
 @dataclass
@@ -32,18 +32,18 @@ class User:
         self.profile_data = await self.pythonversus.get_player_profile(self.account_id)
         self.username = self.account_data["identity"]["alternate"]["wb_network"][0]["username"]
 
-    async def get_rank_data(self, gamemode: str) -> Dict[str, Any]:
-        rank_data = await self.pythonversus.get_rank_data(self.account_id, gamemode)
+    async def get_rank_data(self, gamemode: str, character: str = "all") -> Dict[str, Any]:
+        rank_data = await self.pythonversus.get_rank_data(self.account_id, gamemode, character)
         self.rank_data = rank_data
         return rank_data
 
-    async def get_elo(self, gamemode: str) -> float:
-        rank_data = await self.get_rank_data(gamemode)
+    async def get_elo(self, gamemode: str, character: str = "all") -> float:
+        rank_data = await self.get_rank_data(gamemode, character)
         elo = rank_data["score"]
         return elo
 
-    async def get_rank_str(self, gamemode: str) -> str:
-        return utils.elo_to_rank(await self.get_elo(gamemode))
+    async def get_rank_str(self, gamemode: str, character: str = "all") -> str:
+        return utils.elo_to_rank(await self.get_elo(gamemode, character))
 
     def __post_init__(self):
         if not self.pythonversus:

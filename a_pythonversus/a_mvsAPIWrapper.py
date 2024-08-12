@@ -5,7 +5,7 @@ import aiohttp
 import os
 from dotenv import load_dotenv
 
-from pythonversus.user import User
+from a_pythonversus.a_user import User
 
 
 class AsyncMvsAPIWrapper:
@@ -110,8 +110,8 @@ class AsyncMvsAPIWrapper:
         endpoint = f"{self.url}matches/{id}"
         return await self.api_request(endpoint)
 
-    async def get_rank_data(self, account_id: str, gamemode: str, season: int = 2) -> Dict[str, Any]:
-        endpoint = f"{self.url}leaderboards/ranked_season{season}_{gamemode}_all/score-and-rank/{account_id}"
+    async def get_rank_data(self, account_id: str, gamemode: str, character: str = all, season: int = 2) -> Dict[str, Any]:
+        endpoint = f"{self.url}leaderboards/ranked_season{season}_{gamemode}_{character}/score-and-rank/{account_id}"
         return await self.api_request(endpoint)
 
 
@@ -119,7 +119,7 @@ class AsyncMvsAPIWrapper:
 async def main():
     async with AsyncMvsAPIWrapper() as api:
         try:
-            name = "taetae"
+            name = "bot3265"
             user = await User.from_username(api, name)
             rank_str = await user.get_rank_str("2v2")
             print(name + "'s 2v2 rank: " + rank_str)

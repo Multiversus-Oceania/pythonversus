@@ -1,5 +1,8 @@
-def elo_to_rank(elo: float) -> str:
+def elo_to_rank(elo: [float, None]) -> str:
     # Convert elo to int
+    if elo is None:
+        return "Unranked"
+
     elo = int(elo)
     ranks = ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Masters"]
     divisions = ["5", "4", "3", "2", "1"]
@@ -18,3 +21,4 @@ def elo_to_rank(elo: float) -> str:
     division_index = (elo % 500) // 100
 
     return f"{ranks[rank_index]} {divisions[division_index]}"
+
