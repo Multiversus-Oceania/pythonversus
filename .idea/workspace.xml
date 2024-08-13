@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6be1298-9265-4184-b037-aed3e7753488" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/a_pythonversus/a_Character.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/a_pythonversus/a_MatchAPI.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/a_pythonversus/a_UserAPI.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/a_pythonversus/characters.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a_pythonversus/characters.py" beforeDir="false" afterPath="$PROJECT_DIR$/a_pythonversus/characters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a_pythonversus/a_mvsAPIWrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/a_pythonversus/a_MvsAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a_pythonversus/a_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/a_pythonversus/a_User.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a_pythonversus/characters.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/a_pythonversus/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/a_pythonversus/Utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +42,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.MvsAPIWrapper.executor": "Run",
+    "Python.a_MvsAPI.executor": "Run",
     "Python.a_mvsAPIWrapper.executor": "Run",
     "Python.characters.executor": "Run",
     "Python.mvsAPIWrapper.executor": "Run",
@@ -47,7 +55,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -81,7 +89,10 @@
       <workItem from="1723375828285" duration="155000" />
       <workItem from="1723376457687" duration="2187000" />
       <workItem from="1723450409295" duration="648000" />
-      <workItem from="1723452189055" duration="6025000" />
+      <workItem from="1723452189055" duration="6397000" />
+      <workItem from="1723514823122" duration="595000" />
+      <workItem from="1723546469972" duration="1001000" />
+      <workItem from="1723547500154" duration="2023000" />
     </task>
     <servers />
   </component>
@@ -90,6 +101,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pythonversus$a_mvsAPIWrapper.coverage" NAME="a_mvsAPIWrapper Coverage Results" MODIFIED="1723456015781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a_pythonversus" />
+    <SUITE FILE_PATH="coverage/pythonversus$a_MvsAPI.coverage" NAME="a_MvsAPI Coverage Results" MODIFIED="1723548316230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a_pythonversus" />
     <SUITE FILE_PATH="coverage/pythonversus$mvsAPIWrapper.coverage" NAME="mvsAPIWrapper Coverage Results" MODIFIED="1723454440131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pythonversus" />
     <SUITE FILE_PATH="coverage/pythonversus$user.coverage" NAME="user Coverage Results" MODIFIED="1723378593261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pythonversus" />
     <SUITE FILE_PATH="coverage/pythonversus$utils.coverage" NAME="utils Coverage Results" MODIFIED="1723453916971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pythonversus" />

@@ -1,8 +1,8 @@
-Characters = {
+{
     "AgentSmith": {
         "name": "Agent Smith",
         "slug": "character_c036",
-        "emote": "<:AgentSmithIcon:1259926284713197620>",
+        "emote": "<:AgentSmithIcon:1259926284713197620>"
     },
     "AryaStark": {
         "name": "Arya Stark",
@@ -62,12 +62,12 @@ Characters = {
     "Jason": {
         "name": "Jason",
         "slug": "character_c035",
-        "emote": "<:JasonIcon:1268459708486782976>",
+        "emote": "<:JasonIcon:1268459708486782976>"
     },
     "Joker": {
         "name": "Joker",
         "slug": "character_c028",
-        "emote": "<:JokerIcon:1268459710382739516>",
+        "emote": "<:JokerIcon:1268459710382739516>"
     },
     "LebronJames": {
         "name": "Lebron James",
@@ -140,47 +140,3 @@ Characters = {
         "emote": "<:WonderWomanIcon:1268459749914181724>"
     }
 }
-
-
-def get_character_by_key(key):
-    """Get character information by dictionary key."""
-    return Characters.get(key.strip())
-
-
-def get_character_by_slug(slug):
-    """Get character information by slug."""
-    slug = slug.strip().lower()
-    for character in Characters.values():
-        if character['slug'].lower() == slug:
-            return character
-    return None
-
-
-def get_slug_from_name(name):
-    """Get character slug from name."""
-    name = name.strip().lower()
-    for character in Characters.values():
-        if character['name'].lower() == name:
-            return character['slug']
-    return None
-
-
-def get_name_from_slug(slug):
-    """Get character name from slug."""
-    character = get_character_by_slug(slug)
-    return character['name'] if character else None
-
-
-def get_emote_from_slug(slug):
-    """Get character emote from slug."""
-    character = get_character_by_slug(slug)
-    return character['emote'] if character else None
-
-
-def get_emote_from_name(name):
-    """Get character emote from name."""
-    name = name.strip().lower()
-    for character in Characters.values():
-        if character['name'].lower() == name:
-            return character['emote']
-    return None

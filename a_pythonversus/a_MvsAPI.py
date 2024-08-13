@@ -1,20 +1,26 @@
-import json
-import string
 from typing import Optional, Dict, Any
 import aiohttp
 import os
 from dotenv import load_dotenv
 
-from a_pythonversus.a_user import User
+from a_pythonversus.a_MatchAPI import MatchAPI
+from a_pythonversus.a_User import User
+from a_pythonversus.a_Character import CharacterManager, Character
+from a_pythonversus.a_UserAPI import UserAPI
 
 
-class AsyncMvsAPIWrapper:
+class a_MvsAPIWrapper:
     def __init__(self, steam_token: Optional[str] = None):
         self.header: Optional[Dict[str, str]] = None
         self.token: Optional[str] = None
         self.steam_token: Optional[str] = None
         self.url: str = "https://dokken-api.wbagora.com/"
         self.session: Optional[aiohttp.ClientSession] = None
+
+        # API Helpers
+        self.character_manager = CharacterManager('characters.json')
+        self.user_api = UserAPI(self)
+        self.match_api = MatchAPI(self)
 
         if steam_token is None:
             load_dotenv()
@@ -30,6 +36,7 @@ class AsyncMvsAPIWrapper:
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         await self.session.close()
 
+    # API Utils
     async def refresh_token(self, api_token: Optional[str] = None):
         if api_token is not None:
             self.steam_token = api_token
@@ -52,72 +59,49 @@ class AsyncMvsAPIWrapper:
                 'x-hydra-access-token': self.token
             }
 
-    async def api_request(self, endpoint: str) -> Dict[str, Any]:
-        async with self.session.get(endpoint, headers=self.header) as response:
+    async def request(self, endpoint: str) -> Dict[str, Any]:
+        async with self.session.get(self.url + endpoint, headers=self.header) as response:
             response.raise_for_status()
             return await response.json()
 
-    async def get_player_profile(self, account_id: str) -> Dict[str, Any]:
-        """
-        Get the profile of a player using their account ID.
-        """
-        endpoint = f"{self.url}profiles/{account_id}"
-        return await self.api_request(endpoint)
+    # User lookup
+    async def get_user_from_username(self, username: str) -> User | None:
+        user = await User.from_username(self, username)
+        return user if user is not None else None
 
-    async def get_player_account(self, account_id: str) -> Dict[str, Any]:
-        """
-        Get the account of a player using their account ID.
-        """
-        endpoint = f"{self.url}accounts/{account_id}"
-        return await self.api_request(endpoint)
-
-    async def get_id_from_username(self, account_name: str, limit: int = 5) -> str:
-        """
-        Perform a username search for a player. Tries to match the exact username.
-        """
-        endpoint = f"{self.url}profiles/search_queries/get-by-username/run?username={account_name}&limit={limit}"
-        players = await self.api_request(endpoint)
-
-        search_length = len(players["results"])
-
-        if search_length == 1:
-            return players["results"][0]["result"]["account_id"]
-        else:
-            for player in players["results"]:
-                account_id = player["result"]["account_id"]
-                account_data = await self.get_player_account(account_id)
-                username = account_data["identity"]["alternate"]["wb_network"][0]["username"]
-                if username and username.lower() == account_name.lower():
-                    return account_id
-
-        return "Failed to find matching account"
-
-    async def get_username_from_id(self, account_id: str) -> str:
-        account_data = await self.get_player_account(account_id)
-        username = account_data["identity"]["alternate"]["wb_network"][0]["username"]
-        return username if username else "Failed to find matching account"
+    async def get_user_from_id(self, account_id: str) -> User | None:
+        user = await User.from_id(self, account_id)
+        return user if user is not None else None
 
     async def get_matches(self, account_id: str, count: Optional[int] = None) -> Dict[str, Any]:
-        endpoint = f"{self.url}matches/all/{account_id}"
+        endpoint = f"matches/all/{account_id}"
         if count is not None:
             endpoint += f"?count={count}"
-        return await self.api_request(endpoint)
+        return await self.request(endpoint)
 
     async def get_most_recent_match(self, account_id: str) -> Dict[str, Any]:
         return await self.get_matches(account_id, 1)
 
-    async def get_match_by_id(self, id: str) -> Dict[str, Any]:
-        endpoint = f"{self.url}matches/{id}"
-        return await self.api_request(endpoint)
+    async def get_match_by_id(self, match_id: str) -> Dict[str, Any]:
+        endpoint = f"matches/{match_id}"
+        return await self.request(endpoint)
 
-    async def get_rank_data(self, account_id: str, gamemode: str, character: str = all, season: int = 2) -> Dict[str, Any]:
-        endpoint = f"{self.url}leaderboards/ranked_season{season}_{gamemode}_{character}/score-and-rank/{account_id}"
-        return await self.api_request(endpoint)
+    @staticmethod
+    def get_character_by_slug(self, slug: str) -> Optional['Character']:
+        return self.character_manager.get_character_by_slug(slug)
+
+    @staticmethod
+    def get_character_from_key(self, key: str) -> Optional['Character']:
+        return self.character_manager.get_character_by_key(key)
+
+    @staticmethod
+    def get_character_from_name(self, name: str) -> Optional['Character']:
+        return self.character_manager.get_character_by_name(name)
 
 
 # Example usage
 async def main():
-    async with AsyncMvsAPIWrapper() as api:
+    async with a_MvsAPIWrapper() as api:
         try:
             name = "bot3265"
             user = await User.from_username(api, name)

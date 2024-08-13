@@ -6,6 +6,7 @@ class Match:
     players = []
     mode = None
     raw_data = None
+    map = None
 
     def __init__(self, match_info):
         self.raw_data = match_info
