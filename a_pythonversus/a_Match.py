@@ -1,10 +1,10 @@
-from a_pythonversus.a_User import User
-
-game_modes = ["2v2", "1v1", ]
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 from dataclasses import dataclass
+
 if TYPE_CHECKING:
     from a_pythonversus import a_MvsAPI
+
+game_modes = ["2v2", "1v1"]
 
 @dataclass
 class Match:
@@ -12,13 +12,11 @@ class Match:
     Represents a Match that has been played.
     """
     api: 'a_MvsAPI'
-    match_id: str
-    raw_data: dict[str]
-    mode: str
+    match_id: Optional[str] = None
+    raw_data: Optional[dict] = None
+    # mode: Optional[str] = None
     # TODO: Create Map class
-    map: str
-    teams: list[User]
-    isRanked: 'bool'
+    # map: str
 
     @classmethod
     async def from_id(cls, api: 'a_MvsAPI', match_id: str) -> 'Match':
@@ -29,7 +27,7 @@ class Match:
     async def fetch_data(self):
         if not self.match_id:
             raise ValueError("No match_id provided")
-        self.raw_data = self.api.match_api.get_match_by_id(self.match_id)
+        self.raw_data = await self.api.match_api.get_match_by_id(self.match_id)
 
 class Match1v1(Match):
     pass

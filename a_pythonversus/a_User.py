@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Optional, Dict, Any, TYPE_CHECKING
 
 from a_pythonversus import Utils
+from a_pythonversus.a_Match import Match
 
 if TYPE_CHECKING:
     from a_pythonversus import a_MvsAPI
@@ -58,11 +59,11 @@ class User:
         match_id = match["matches"][0]["id"]
         return match_id
 
-    async def get_most_recent_match(self):
+    async def get_most_recent_match(self) -> Optional["Match"]:
         match_id = await self.get_most_recent_match_id()
-        match = await self.api.match_api.get_match_by_id(match_id)
+        # match = await self.api.match_api.get_match_by_id(match_id)
         # Once Match class is complete, instantiate and return a Match object
-        # match = Match(match_id)
+        match = await Match.from_id(self.api, match_id)
         return match
 
     def __post_init__(self):

@@ -99,10 +99,10 @@ async def main():
         try:
             name = "taetae"
             user = await User.from_username(api, name)
-            recent_match_id = await user.get_most_recent_match_id()
+            recent_match = await user.get_most_recent_match()
             # recent_match = await api.match_api.get_match_by_id("66b5d4afec0f1df34e87dd83")
             # print(json.dumps(recent_match, indent=4))
-            print(recent_match_id)
+            print(json.dumps(recent_match.raw_data, indent=4))
         except aiohttp.ClientError as e:
             print(f"An error occurred: {e}")
 
