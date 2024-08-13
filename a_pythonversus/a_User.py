@@ -53,6 +53,9 @@ class User:
     async def get_rank_str(self, gamemode: str, character: str = "all") -> str:
         return Utils.elo_to_rank(await self.get_elo(gamemode, character))
 
+    async def get_most_recent_match(self):
+        return await self.pythonversus.match_api.get_matches(self.account_id, 1)
+
     def __post_init__(self):
         if not self.pythonversus:
             raise ValueError("MvsAPIWrapper instance is required")

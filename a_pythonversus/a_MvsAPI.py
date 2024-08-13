@@ -1,3 +1,4 @@
+import json
 from typing import Optional, Dict, Any
 import aiohttp
 import os
@@ -73,19 +74,6 @@ class a_MvsAPIWrapper:
         user = await User.from_id(self, account_id)
         return user if user is not None else None
 
-    async def get_matches(self, account_id: str, count: Optional[int] = None) -> Dict[str, Any]:
-        endpoint = f"matches/all/{account_id}"
-        if count is not None:
-            endpoint += f"?count={count}"
-        return await self.request(endpoint)
-
-    async def get_most_recent_match(self, account_id: str) -> Dict[str, Any]:
-        return await self.get_matches(account_id, 1)
-
-    async def get_match_by_id(self, match_id: str) -> Dict[str, Any]:
-        endpoint = f"matches/{match_id}"
-        return await self.request(endpoint)
-
     @staticmethod
     def get_character_by_slug(self, slug: str) -> Optional['Character']:
         return self.character_manager.get_character_by_slug(slug)
@@ -103,13 +91,10 @@ class a_MvsAPIWrapper:
 async def main():
     async with a_MvsAPIWrapper() as api:
         try:
-            name = "bot3265"
+            name = "taetae"
             user = await User.from_username(api, name)
-            rank_str = await user.get_rank_str("2v2")
-            print(name + "'s 2v2 rank: " + rank_str)
-            # print("Username:", user.username)
-            # print("id:", user.account_id)
-            # print(json.dumps(user.profile_data))
+            recent_match = await user.get_most_recent_match()
+            print(json.dumps(recent_match, indent=4))
         except aiohttp.ClientError as e:
             print(f"An error occurred: {e}")
 

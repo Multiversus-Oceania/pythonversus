@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6be1298-9265-4184-b037-aed3e7753488" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/a_pythonversus/a_Character.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/a_pythonversus/a_MatchAPI.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/a_pythonversus/a_UserAPI.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/a_pythonversus/characters.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a_pythonversus/a_mvsAPIWrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/a_pythonversus/a_MvsAPI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a_pythonversus/a_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/a_pythonversus/a_User.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a_pythonversus/characters.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/a_pythonversus/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/a_pythonversus/Utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a_pythonversus/a_MatchAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/a_pythonversus/a_MatchAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a_pythonversus/a_MvsAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/a_pythonversus/a_MvsAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a_pythonversus/a_User.py" beforeDir="false" afterPath="$PROJECT_DIR$/a_pythonversus/a_User.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +87,7 @@
       <workItem from="1723452189055" duration="6397000" />
       <workItem from="1723514823122" duration="595000" />
       <workItem from="1723546469972" duration="1001000" />
-      <workItem from="1723547500154" duration="2023000" />
+      <workItem from="1723547500154" duration="3015000" />
     </task>
     <servers />
   </component>
