@@ -10,7 +10,7 @@ class MatchAPI:
     def __init__(self, api: 'a_MvsAPI'):
         self.api = api
 
-    async def get_matches(self, account_id: str, count: Optional[int] = None) -> Dict[str, Any]:
+    async def get_user_matches(self, account_id: str, count: Optional[int] = None) -> Dict[str, Any]:
         endpoint = f"matches/all/{account_id}"
         if count is not None:
             endpoint += f"?count={count}"

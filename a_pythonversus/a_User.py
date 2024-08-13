@@ -9,39 +9,39 @@ if TYPE_CHECKING:
 
 @dataclass
 class User:
-    pythonversus: 'a_MvsAPI'
+    api: 'a_MvsAPI'
     account_id: Optional[str] = None
     username: Optional[str] = None
     profile_data: Optional[Dict[str, Any]] = None
     account_data: Optional[Dict[str, Any]] = None
 
     @classmethod
-    async def from_id(cls, pythonversus: 'a_MvsAPI', account_id: str) -> 'User':
-        user = cls(pythonversus=pythonversus, account_id=account_id)
+    async def from_id(cls, api: 'a_MvsAPI', account_id: str) -> 'User':
+        user = cls(api=api, account_id=account_id)
         await user.fetch_data()
         return user
 
     @classmethod
-    async def from_username(cls, pythonversus: 'a_MvsAPI', username: str) -> 'User':
-        account_id = await pythonversus.user_api.get_id_from_username(username)
-        return await cls.from_id(pythonversus, account_id)
+    async def from_username(cls, api: 'a_MvsAPI', username: str) -> 'User':
+        account_id = await api.user_api.get_id_from_username(username)
+        return await cls.from_id(api, account_id)
 
     async def fetch_data(self) -> None:
         if not self.account_id:
             raise ValueError("Account ID is required to fetch data")
 
-        self.account_data = await self.pythonversus.user_api.get_player_account(self.account_id)
-        self.profile_data = await self.pythonversus.user_api.get_player_profile(self.account_id)
+        self.account_data = await self.api.user_api.get_player_account(self.account_id)
+        self.profile_data = await self.api.user_api.get_player_profile(self.account_id)
         self.username = self.account_data["identity"]["alternate"]["wb_network"][0]["username"]
 
     async def refresh_profile(self):
-        self.profile_data = await self.pythonversus.user_api.get_player_profile(self.account_id)
+        self.profile_data = await self.api.user_api.get_player_profile(self.account_id)
 
     # Rank Information
     async def get_rank_data(self, account_id: str, gamemode: str, character: str = "all", season: int = 2) -> Dict[
         str, Any]:
         endpoint = f"leaderboards/ranked_season{season}_{gamemode}_{character}/score-and-rank/{account_id}"
-        return await self.pythonversus.user_api.request(endpoint)
+        return await self.api.user_api.request(endpoint)
 
     # async def get_highest_ranked_character(self, gamemode: str) -> ''
 
@@ -53,9 +53,18 @@ class User:
     async def get_rank_str(self, gamemode: str, character: str = "all") -> str:
         return Utils.elo_to_rank(await self.get_elo(gamemode, character))
 
+    async def get_most_recent_match_id(self):
+        match = await self.api.match_api.get_user_matches(self.account_id, 1)
+        match_id = match["matches"][0]["id"]
+        return match_id
+
     async def get_most_recent_match(self):
-        return await self.pythonversus.match_api.get_matches(self.account_id, 1)
+        match_id = await self.get_most_recent_match_id()
+        match = await self.api.match_api.get_match_by_id(match_id)
+        # Once Match class is complete, instantiate and return a Match object
+        # match = Match(match_id)
+        return match
 
     def __post_init__(self):
-        if not self.pythonversus:
+        if not self.api:
             raise ValueError("MvsAPIWrapper instance is required")
