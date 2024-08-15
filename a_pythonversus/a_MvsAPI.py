@@ -219,24 +219,8 @@ async def main():
         try:
             user = await User.from_username(api, "taetae")
             match = await user.get_most_recent_match()
-            print("Match ID:", match.match_id)
-            print("Map:", match.map)
-            print("Gamemode:", match.mode)
-            # print("Winning team index:", match.winning_team_index)
-            # print("Score:", " - ".join(str(score) for score in match.score))
-
-            # print("\nPlayer Information:")
-            # print(match.format_player_info())
-
-            print("\nWinners:")
-            for winner in match.winners:
-                print(
-                    f"  {winner.username} (Character: {winner.character.name}, Damage Dealt: {winner.damage_dealt:.2f}, Ringouts: {winner.ringouts}, Ringouts received: {winner.ringouts_received} RP Delta: {winner.rp_delta if winner.rp_delta is not None else 'N/A'})")
-
-            print("\nLosers:")
-            for loser in match.losers:
-                print(
-                    f"  {loser.username} (Character: {loser.character.name}, Damage Dealt: {loser.damage_dealt:.2f}, Ringouts: {loser.ringouts}, Ringouts Received: {winner.ringouts_received}, RP Delta: {loser.rp_delta if loser.rp_delta is not None else 'N/A'})")
+            # match = await Match.from_id(api, "66b5d3f8fa6d5fae21806f52")
+            print(match.format_match_info())
         except aiohttp.ClientError as e:
             print(f"An error occurred: {e}")
 if __name__ == "__main__":

@@ -35,6 +35,9 @@ class Match:
     map: Optional[str] = None
     players: List[Player] = field(default_factory=list)
     score: Optional[List[int]] = None
+    pre_match_score: Optional[List[int]] = None
+    current_match_score: Optional[List[int]] = None
+    previous_games: Optional[List[str]] = None
     winning_team_index: Optional[int] = None
 
     @classmethod
@@ -53,6 +56,7 @@ class Match:
         self._parse_players()
         self._parse_score()
         self._parse_winning_team()
+        self._parse_set_score()
 
     def _parse_map(self):
         match_map = self.raw_data.get("server_data", {}).get("GameplayConfig", {}).get("Map")
@@ -88,18 +92,11 @@ class Match:
                 if stat.get("account_id") == account_id:
                     end_of_match_stats = stat.get("data", {}).get("EndOfMatchStats", {})
                     player_mission_updates = end_of_match_stats.get("PlayerMissionUpdates", {}).get(account_id, {})
-                    print(f"Debug: player_mission_updates for {account_id}:")
-                    print(json.dumps(player_mission_updates, indent=2))
                     player.damage_dealt = player_mission_updates.get("Stat:Game:Character:TotalDamageDealt", 0.0)
                     player.damage_taken = player_mission_updates.get("Stat:Game:Character:TotalDamageTaken", 0.0)
                     player.ringouts = player_mission_updates.get("Stat:Game:Character:TotalRingouts", 0)
                     player.ringouts_received = player_mission_updates.get("Stat:Game:Character:TotalRingoutsReceived",
                                                                           0)
-
-                    # If ringouts_received is still 0, try to get it directly from player_mission_updates
-                    if player.ringouts_received == 0:
-                        player.ringouts_received = player_mission_updates.get(
-                            "Stat:Game:Character:TotalRingoutsReceived", 0)
 
                     break
 
@@ -135,6 +132,16 @@ class Match:
         for player in self.players:
             player.is_winner = player.team_index == self.winning_team_index
 
+    def _parse_set_score(self):
+        match_set = self.raw_data.get("server_data").get("MatchSet", {})
+        self.previous_set_score = match_set.get("Score", [0, 0])
+        self.previous_games = match_set.get("PriorMatches", [])
+
+        # Calculate the current set score
+        self.current_set_score = self.previous_set_score.copy()
+        if self.winning_team_index is not None:
+            self.current_set_score[self.winning_team_index] += 1
+
     def format_player_info(self) -> str:
         """
         Format player information for easy reading.
@@ -155,13 +162,45 @@ class Match:
                 f"  Ringouts: {player.ringouts}\n"
                 f"  Ringouts Received: {player.ringouts_received}\n"
                 f"  RP Delta: {player.rp_delta if player.rp_delta is not None else 'N/A'}\n"
-                f"  Total Games Played: {player.total_games_played if player.total_games_played is not None else 'N/A'}\n"
-                f"  Total Sets Played: {player.total_sets_played if player.total_sets_played is not None else 'N/A'}\n"
                 f"  Perks: {', '.join(player.perks)}\n"
             )
             player_info.append(info)
         return "\n".join(player_info)
 
+    def format_match_info(self) -> str:
+        """
+        Format match information for easy reading.
+        """
+        info = [
+            f"Match ID: {self.match_id}",
+            f"Map: {self.map}",
+            f"Gamemode: {self.mode}",
+            f"Previous Set Score: {self.previous_set_score[0]} - {self.previous_set_score[1]}",
+            f"Current Set Score: {self.current_set_score[0]} - {self.current_set_score[1]}",
+            f"Winning Team Index: {self.winning_team_index}",
+            f"Previous Games: {', '.join(x for x in self.previous_games)}",
+            "Winners:"
+        ]
+
+        for winner in self.winners:
+            info.append(f"  {winner.username} (Character: {winner.character}, "
+                        f"Damage Dealt: {winner.damage_dealt:.2f}, "
+                        f"Damage Taken: {winner.damage_taken:.2f}, "
+                        f"Ringouts: {winner.ringouts}, "
+                        f"Ringouts received: {winner.ringouts_received}, "
+                        f"RP Delta: {winner.rp_delta if winner.rp_delta is not None else 'N/A'})")
+
+        info.append("Losers:")
+
+        for loser in self.losers:
+            info.append(f"  {loser.username} (Character: {loser.character}, "
+                        f"Damage Dealt: {loser.damage_dealt:.2f}, "
+                        f"Damage Taken: {loser.damage_taken:.2f}, "
+                        f"Ringouts: {loser.ringouts}, "
+                        f"Ringouts Received: {loser.ringouts_received}, "
+                        f"RP Delta: {loser.rp_delta if loser.rp_delta is not None else 'N/A'})")
+
+        return "\n".join(info)
     @property
     def winners(self) -> List[Player]:
         return [player for player in self.players if player.is_winner]
