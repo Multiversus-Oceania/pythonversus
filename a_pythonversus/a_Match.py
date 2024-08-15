@@ -33,6 +33,7 @@ class Match:
     raw_data: Optional[dict] = None
     mode: Optional[str] = None
     map: Optional[str] = None
+    state: Optional[str] = None
     players: List[Player] = field(default_factory=list)
     score: Optional[List[int]] = None
     pre_match_score: Optional[List[int]] = None
@@ -51,6 +52,7 @@ class Match:
             raise ValueError("No match_id provided")
 
         self.raw_data = await self.api.match_api.get_match_by_id(self.match_id)
+        self.state = self.raw_data['state']
         self._parse_map()
         self._parse_mode()
         self._parse_players()
@@ -173,34 +175,47 @@ class Match:
         """
         info = [
             f"Match ID: {self.match_id}",
+            f"State: {self.state}",
             f"Map: {self.map}",
             f"Gamemode: {self.mode}",
             f"Previous Set Score: {self.previous_set_score[0]} - {self.previous_set_score[1]}",
             f"Current Set Score: {self.current_set_score[0]} - {self.current_set_score[1]}",
             f"Winning Team Index: {self.winning_team_index}",
             f"Previous Games: {', '.join(x for x in self.previous_games)}",
-            "Winners:"
         ]
 
-        for winner in self.winners:
-            info.append(f"  {winner.username} (Character: {winner.character}, "
-                        f"Damage Dealt: {winner.damage_dealt:.2f}, "
-                        f"Damage Taken: {winner.damage_taken:.2f}, "
-                        f"Ringouts: {winner.ringouts}, "
-                        f"Ringouts received: {winner.ringouts_received}, "
-                        f"RP Delta: {winner.rp_delta if winner.rp_delta is not None else 'N/A'})")
-
-        info.append("Losers:")
-
-        for loser in self.losers:
-            info.append(f"  {loser.username} (Character: {loser.character}, "
-                        f"Damage Dealt: {loser.damage_dealt:.2f}, "
-                        f"Damage Taken: {loser.damage_taken:.2f}, "
-                        f"Ringouts: {loser.ringouts}, "
-                        f"Ringouts Received: {loser.ringouts_received}, "
-                        f"RP Delta: {loser.rp_delta if loser.rp_delta is not None else 'N/A'})")
+        if self.state == "open" or self.state == "in_progress":
+            info.extend(self._format_team_info())
+        else:
+            info.extend(self._format_winner_loser_info())
 
         return "\n".join(info)
+
+    def _format_team_info(self) -> List[str]:
+        team_info = []
+        for team_index, team_name in [(0, "Blue Team"), (1, "Red Team")]:
+            team_info.append(f"{team_name}:")
+            for player in self.teams.get(team_index, []):
+                team_info.append(self._format_player_line(player))
+        return team_info
+
+    def _format_winner_loser_info(self) -> List[str]:
+        info = ["Winners:"]
+        for winner in self.winners:
+            info.append(self._format_player_line(winner))
+        info.append("Losers:")
+        for loser in self.losers:
+            info.append(self._format_player_line(loser))
+        return info
+
+    def _format_player_line(self, player: Player) -> str:
+        return (f"  {player.username} (Character: {player.character}, "
+                f"Damage Dealt: {player.damage_dealt:.2f}, "
+                f"Damage Taken: {player.damage_taken:.2f}, "
+                f"Ringouts: {player.ringouts}, "
+                f"Ringouts received: {player.ringouts_received}, "
+                f"RP Delta: {player.rp_delta if player.rp_delta is not None else 'N/A'})")
+
     @property
     def winners(self) -> List[Player]:
         return [player for player in self.players if player.is_winner]
@@ -217,8 +232,6 @@ class Match:
                 teams[player.team_index] = []
             teams[player.team_index].append(player)
         return teams
-
-
 class Match1v1(Match):
     pass
 
