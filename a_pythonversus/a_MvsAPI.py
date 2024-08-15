@@ -217,11 +217,12 @@ async def main():
     """
     async with MvsAPIWrapper() as api:
         try:
-            user = await User.from_username(api, "menamecheese")
-            match = await user.get_most_recent_match()
+            user = await User.from_username(api, "fda2021")
+            # match = await user.get_most_recent_match()
             # match = await Match.from_id(api, "66bcfd74a95989a5c7e135ef")
-            print(match.format_match_info())
+            # print(match.format_match_info())
             # print(json.dumps(match.raw_data, indent=4))
+            print(json.dumps(user.profile_data, indent=4))
         except aiohttp.ClientError as e:
             print(f"An error occurred: {e}")
 if __name__ == "__main__":
