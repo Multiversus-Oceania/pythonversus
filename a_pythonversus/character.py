@@ -46,3 +46,7 @@ class CharacterManager:
     def get_emote_from_name(self, name: str) -> Optional[str]:
         character = self.get_character_by_name(name)
         return character.emote if character else None
+
+    def get_name_from_slug(self, slug: str) -> Optional[str]:
+        character = self.get_character_by_slug(slug)
+        return character.name if character else None
