@@ -27,6 +27,11 @@ class User:
         account_id = await api.user_api.get_id_from_username(username)
         return await cls.from_id(api, account_id)
 
+    def user_summary(self):
+        summary = f"username: {self.username}\n"
+        summary += f"account_id: {self.account_id}"
+        return summary
+
     async def fetch_data(self) -> None:
         if not self.account_id:
             raise ValueError("Account ID is required to fetch data")

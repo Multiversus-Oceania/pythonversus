@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+setup.py
+a_pythonversus/Utils.py
+a_pythonversus/__init__.py
+a_pythonversus/a_Match.py
+a_pythonversus/a_MatchAPI.py
+a_pythonversus/a_MvsAPI.py
+a_pythonversus/a_User.py
+a_pythonversus/a_UserAPI.py
+a_pythonversus/character.py
+pythonversus.egg-info/PKG-INFO
+pythonversus.egg-info/SOURCES.txt
+pythonversus.egg-info/dependency_links.txt
+pythonversus.egg-info/top_level.txt

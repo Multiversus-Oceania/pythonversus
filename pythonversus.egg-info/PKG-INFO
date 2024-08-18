@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: pythonversus
+Version: 1.0
+Summary: Async wrapper for the MultiVersus API written in Python
+Home-page: https://github.com/Multiversus-Oceania/pythonversus
+Author: taeyeong2k
+Author-email: taeyeong2000@gmail.com

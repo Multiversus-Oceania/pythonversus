@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 import json
+from importlib import resources
 from typing import Optional, Dict, Any
 import aiohttp
 import os
+
 from dotenv import load_dotenv
 
 from a_pythonversus.a_Match import Match
@@ -37,7 +39,8 @@ class MvsAPIWrapper:
         self.session: Optional[aiohttp.ClientSession] = None
 
         # API Helpers
-        self.character_manager = CharacterManager('characters.json')
+        with resources.path('a_pythonversus', 'characters.json') as config_path:
+            self.character_manager = CharacterManager(str(config_path))
         self.user_api = UserAPI(self)
         self.match_api = MatchAPI(self)
 
@@ -61,12 +64,12 @@ class MvsAPIWrapper:
     @staticmethod
     def _load_maps() -> Dict[str, Any]:
         """
-        Load map data from a JSON file.
+        Load map data from a JSON file using importlib.resources.
 
         :return: Dictionary containing map data.
         :rtype: Dict[str, Any]
         """
-        with open('maps.json', 'r') as f:
+        with resources.open_text('a_pythonversus', 'maps.json') as f:
             return json.load(f)
 
     async def __aenter__(self):
